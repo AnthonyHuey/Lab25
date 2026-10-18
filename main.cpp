@@ -9,8 +9,13 @@
 #include <string>
 #include <chrono>
 #include <fstream>
+#include <algorithm>
 using namespace std;
 using namespace std::chrono;
+
+// it would be a lot easier to just write a sinlge function for each race
+// i loosly remember template but i'd have to relearn it, 
+// also i don't even know if it would be allowed. will probably use it anyways
 
 void nanoOutput(high_resolution_clock::time_point, 
                 high_resolution_clock::time_point); 
@@ -21,8 +26,8 @@ int main()
     vector<string> myVector;
     list<string> myList;
     set<string> mySet;
-    cout << "\t | VECTOR |\t | LIST |\t | SET |\n" << "READ ";
-// Read in the codes.txt into each and time it
+    cout << "\t| VECTOR |\t| LIST |\t| SET |\n" << "READ "; // format later
+    // Read in the codes.txt into each and time it
     ifstream fin;
     fin.open("codes.txt");
     if (fin.good())
@@ -68,26 +73,39 @@ int main()
             nanoOutput(start, end);
             done = 1;
         }
+        done = 0;
 
     fin.close();
     }
     else 
         cout << "File not found.\n";
 
-// Sort each of them, and time it. Set is exempt it gets -1
+    // Sort each of them, and time it. Set is exempt it gets -1
+        cout << "\nSORT ";
+        auto start = high_resolution_clock::now();
+        sort(myVector.begin(), myVector.end()); // easy way out
+        auto end = high_resolution_clock::now();
+        nanoOutput(start, end);
 
-// insert "TESTCODE" into the middle of each, and time it.
+        start = high_resolution_clock::now();
+        myList.sort();
+        end = high_resolution_clock::now();
+        nanoOutput(start, end);
+        done = 1;
+    
+        cout << "\t| -1 |"; 
+    // insert "TESTCODE" into the middle of each, and time it.
 
-// Delete the middle-ish element of each and time it
+    // Delete the middle-ish element of each and time it
 
-// ok either store each value in a vector to output later
-// or output it just as i get it. hmm
-// Output results, like so.
-//              VECTOR  -  LIST -  SET
-//  READ    - 
-//  SORT    - 
-//  INSERT  -
-//  DELETE  -
+    // ok either store each value in a vector to output later
+    // or output it just as i get it. hmm
+    // Output results, like so.
+    //              VECTOR  -  LIST -  SET
+    //  READ    - 
+    //  SORT    - 
+    //  INSERT  -
+    //  DELETE  -
 
     return 0;
 }
@@ -99,8 +117,8 @@ void nanoOutput(high_resolution_clock::time_point start,
     cout << "\t| " << duration.count() << " |"; 
 }
 /* syntax examples:
-auto start = high_resolution_clock::now()
-auto end = high_resolution_clock::now()
+auto start = high_resolution_clock::now();
+auto end = high_resolution_clock::now();
 auto duration = duration_cast<milliseconds>(end - start)
 duration.count() references elapsed milliseconds
 */
