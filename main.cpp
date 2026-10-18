@@ -21,31 +21,58 @@ int main()
     vector<string> myVector;
     list<string> myList;
     set<string> mySet;
-
+    cout << "\t | VECTOR |\t | LIST |\t | SET |\n" << "READ ";
 // Read in the codes.txt into each and time it
-ifstream fin;
-fin.open("codes.txt");
-if (fin.good())
-{
-    while (done != 1)
-    {
-        auto start = high_resolution_clock::now();
-        for (int i = 0; i < MAX; i++)
+    ifstream fin;
+    fin.open("codes.txt");
+    if (fin.good())
+    {   
+        while (done != 1)
         {
-            string line;
-            getline(fin, line);
-            myVector.push_back(line);
+            auto start = high_resolution_clock::now();
+            for (int i = 0; i < MAX; i++)
+            {
+                string line;
+                getline(fin, line);
+                myVector.push_back(line);
+            }
+            auto end = high_resolution_clock::now();
+            nanoOutput(start, end);
+            done = 1;
         }
-        auto end = high_resolution_clock::now();
-        nanoOutput(start, end);
-        done = 1;
-    }
-    done = 0;
+        done = 0;
+        while (done != 1)
+        {
+            auto start = high_resolution_clock::now();
+            for (int i = 0; i < MAX; i++)
+            {
+                string line;
+                getline(fin, line);
+                myList.push_back(line);
+            }
+            auto end = high_resolution_clock::now();
+            nanoOutput(start, end);
+            done = 1;
+        }
+        done = 0;
+        while (done != 1)
+        {
+            auto start = high_resolution_clock::now();
+            for (int i = 0; i < MAX; i++)
+            {
+                string line;
+                getline(fin, line);
+                mySet.insert(line);
+            }
+            auto end = high_resolution_clock::now();
+            nanoOutput(start, end);
+            done = 1;
+        }
 
-fin.close();
-}
-else 
-    cout << "File not found.\n";
+    fin.close();
+    }
+    else 
+        cout << "File not found.\n";
 
 // Sort each of them, and time it. Set is exempt it gets -1
 
