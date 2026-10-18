@@ -9,6 +9,9 @@
 #include <string>
 #include <chrono>
 using namespace std;
+using namespace std::chrono;
+
+
 
 int main() 
 {
@@ -26,7 +29,8 @@ int main()
 
 
 
-
+// ok either store each value in a vector to output later
+// or output it just as i get it. hmm
 // Output results, like so.
 //              VECTOR  -  LIST -  SET
 //  READ    - 
@@ -43,3 +47,28 @@ auto end = high_resolution_clock::now()
 auto duration = duration_cast<milliseconds>(end - start)
 duration.count() references elapsed milliseconds
 */
+
+/* just putting this here
+using namespace std::chrono;
+
+int main() {
+    // Start timing
+    auto start = high_resolution_clock::now();
+
+    // Example loop to measure
+    vector<int> numbers;
+    for(int i = 0; i < 1000000; ++i) {
+        numbers.push_back(i);
+    }
+
+    // End timing
+    auto end = high_resolution_clock::now();
+
+    // Calculate duration
+    auto duration = duration_cast<nanoseconds>(end - start);
+
+    // Output the duration in nanoseconds
+    cout << "Time taken: " << duration.count() << " nanoseconds\n";
+
+    return 0;
+}*/
