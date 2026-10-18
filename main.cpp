@@ -96,25 +96,45 @@ int main()
     cout << "\t| -1 |"; // set is already sorted
 
     // insert "TESTCODE" into the middle of each, and time it.
+    cout << "\nINSERT ";
+
     start = high_resolution_clock::now();
     myVector.insert(myVector.begin() + myVector.size() / 2, "TESTCODE");
     end = high_resolution_clock::now();
     nanoOutput(start, end);
 
-    start = high_resolution_clock::now();
     auto it = myList.begin();
     advance(it, myList.size() / 2);
-    myList.insert(it, "TESTCODE");
+    start = high_resolution_clock::now();
+    myList.insert(it, "TESTCODE"); // took it/advance out, just testing insert.
     end = high_resolution_clock::now();
     nanoOutput(start, end);
 
     // uhh? sets are always sorted so there's no point to set a position right? 
+    auto sit = mySet.begin(); // the delete need the middle so might aswell - 
+    advance(it, mySet.size() / 2); // - do this here.
     start = high_resolution_clock::now(); 
-    mySet.insert("TESTCODE");
+    mySet.insert(sit, "TESTCODE"); 
     end = high_resolution_clock::now();
     nanoOutput(start, end);
 
     // Delete the middle-ish element of each and time it
+    cout << "\nDELETE "; // These all use erase, another good spot for template.
+
+    start = high_resolution_clock::now();
+    myVector.erase(myVector.begin() + myVector.size() / 2);
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    start = high_resolution_clock::now();
+    myList.erase(it); // it is already there, might aswell use it.
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    start = high_resolution_clock::now();
+    mySet.erase(sit);
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
 
     // ok either store each value in a vector to output later
     // or output it just as i get it. hmm
