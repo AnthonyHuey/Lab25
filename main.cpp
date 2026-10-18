@@ -30,9 +30,9 @@ int main()
     // Read in the codes.txt into each and time it
     ifstream fin;
     fin.open("codes.txt");
-    if (fin.good())
+    if (fin.good()) 
     {   
-        while (done != 1)
+        while (done != 1) 
         {
             auto start = high_resolution_clock::now();
             for (int i = 0; i < MAX; i++)
@@ -81,20 +81,38 @@ int main()
         cout << "File not found.\n";
 
     // Sort each of them, and time it. Set is exempt it gets -1
-        cout << "\nSORT ";
-        auto start = high_resolution_clock::now();
-        sort(myVector.begin(), myVector.end()); // easy way out
-        auto end = high_resolution_clock::now();
-        nanoOutput(start, end);
+    cout << "\nSORT ";
 
-        start = high_resolution_clock::now();
-        myList.sort();
-        end = high_resolution_clock::now();
-        nanoOutput(start, end);
-        done = 1;
-    
-        cout << "\t| -1 |"; 
+    auto start = high_resolution_clock::now();
+    sort(myVector.begin(), myVector.end()); // easy way out
+    auto end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    start = high_resolution_clock::now();
+    myList.sort();
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    cout << "\t| -1 |"; // set is already sorted
+
     // insert "TESTCODE" into the middle of each, and time it.
+    start = high_resolution_clock::now();
+    myVector.insert(myVector.begin() + myVector.size() / 2, "TESTCODE");
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    start = high_resolution_clock::now();
+    auto it = myList.begin();
+    advance(it, myList.size() / 2);
+    myList.insert(it, "TESTCODE");
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
+
+    // uhh? sets are always sorted so there's no point to set a position right? 
+    start = high_resolution_clock::now(); 
+    mySet.insert("TESTCODE");
+    end = high_resolution_clock::now();
+    nanoOutput(start, end);
 
     // Delete the middle-ish element of each and time it
 
@@ -119,6 +137,7 @@ void nanoOutput(high_resolution_clock::time_point start,
 /* syntax examples:
 auto start = high_resolution_clock::now();
 auto end = high_resolution_clock::now();
+nanoOutput(start, end);
 auto duration = duration_cast<milliseconds>(end - start)
 duration.count() references elapsed milliseconds
 */
