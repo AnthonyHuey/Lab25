@@ -11,7 +11,7 @@
 using namespace std;
 using namespace std::chrono;
 
-
+void nanoOutput(long long count) { cout << "\t| " << count << " |"; }
 
 int main() 
 {
@@ -27,7 +27,24 @@ int main()
 
 // Delete the middle-ish element of each and time it
 
+// Start timing
+    auto start = high_resolution_clock::now();
 
+    // Example loop to measure
+    vector<int> numbers;
+    for(int i = 0; i < 1000000; ++i) {
+        numbers.push_back(i);
+    }
+
+    // End timing
+    auto end = high_resolution_clock::now();
+
+    // Calculate duration
+    auto duration = duration_cast<nanoseconds>(end - start);
+
+    // Output the duration in nanoseconds
+    cout << "Time taken: " << duration.count() << " nanoseconds\n";
+    nanoOutput(duration.count());
 
 // ok either store each value in a vector to output later
 // or output it just as i get it. hmm
