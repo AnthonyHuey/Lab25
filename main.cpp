@@ -11,40 +11,21 @@
 using namespace std;
 using namespace std::chrono;
 
-void nanoOutput(long long count) { cout << "\t| " << count << " |"; }
-
+void nanoOutput(high_resolution_clock::time_point, 
+                high_resolution_clock::time_point); 
 int main() 
 {
     vector<string> myVector;
     list<string> myList;
     set<string> mySet;
 
-// Read in the codes.txt into each and time it
+// Read in the codes.txt into each and time it 
 
 // Sort each of them, and time it. Set is exempt it gets -1
 
 // insert "TESTCODE" into the middle of each, and time it.
 
 // Delete the middle-ish element of each and time it
-
-// Start timing
-    auto start = high_resolution_clock::now();
-
-    // Example loop to measure
-    vector<int> numbers;
-    for(int i = 0; i < 1000000; ++i) {
-        numbers.push_back(i);
-    }
-
-    // End timing
-    auto end = high_resolution_clock::now();
-
-    // Calculate duration
-    auto duration = duration_cast<nanoseconds>(end - start);
-
-    // Output the duration in nanoseconds
-    cout << "Time taken: " << duration.count() << " nanoseconds\n";
-    nanoOutput(duration.count());
 
 // ok either store each value in a vector to output later
 // or output it just as i get it. hmm
@@ -58,6 +39,12 @@ int main()
     return 0;
 }
 
+void nanoOutput(high_resolution_clock::time_point start, 
+                high_resolution_clock::time_point end) 
+{ 
+    auto duration = duration_cast<nanoseconds>(end - start);
+    cout << "\t| " << duration.count() << " |"; 
+}
 /* syntax examples:
 auto start = high_resolution_clock::now()
 auto end = high_resolution_clock::now()
