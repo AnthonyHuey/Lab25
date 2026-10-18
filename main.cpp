@@ -8,18 +8,44 @@
 #include <set>
 #include <string>
 #include <chrono>
+#include <fstream>
 using namespace std;
 using namespace std::chrono;
 
 void nanoOutput(high_resolution_clock::time_point, 
                 high_resolution_clock::time_point); 
+const int MAX = 20000;
 int main() 
 {
+    bool done = 0;
     vector<string> myVector;
     list<string> myList;
     set<string> mySet;
 
-// Read in the codes.txt into each and time it 
+// Read in the codes.txt into each and time it
+ifstream fin;
+fin.open("codes.txt");
+if (fin.good())
+{
+    while (done != 1)
+    {
+        auto start = high_resolution_clock::now();
+        for (int i = 0; i < MAX; i++)
+        {
+            string line;
+            getline(fin, line);
+            myVector.push_back(line);
+        }
+        auto end = high_resolution_clock::now();
+        nanoOutput(start, end);
+        done = 1;
+    }
+    done = 0;
+
+fin.close();
+}
+else 
+    cout << "File not found.\n";
 
 // Sort each of them, and time it. Set is exempt it gets -1
 
